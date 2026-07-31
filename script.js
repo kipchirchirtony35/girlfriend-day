@@ -1,4 +1,5 @@
-const envelope = document.getElementById('envelope');
+
+  const envelope = document.getElementById('envelope');
   const envelopeWrap = document.getElementById('envelopeWrap');
   const heroStage = document.getElementById('heroStage');
   const letterCard = document.getElementById('letterCard');
