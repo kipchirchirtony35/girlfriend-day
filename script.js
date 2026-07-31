@@ -1,15 +1,20 @@
-
-  const envelope = document.getElementById('envelope');
+const envelope = document.getElementById('envelope');
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  const heroStage = document.getElementById('heroStage');
+  const letterCard = document.getElementById('letterCard');
   const heroHint = document.getElementById('heroHint');
-  const letterSection = document.getElementById('letterSection');
 
   function openEnvelope(){
     if(envelope.classList.contains('open')) return;
     envelope.classList.add('open');
     heroHint.style.transition = 'opacity 0.4s ease';
+    heroHint.style.opacity = '0';
+
     setTimeout(() => {
-      letterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 650);
+      envelopeWrap.classList.add('hidden');
+      heroStage.classList.add('revealed');
+      letterCard.classList.add('visible');
+    }, 500);
   }
 
   envelope.addEventListener('click', openEnvelope);
@@ -31,4 +36,3 @@
   myNameInput.addEventListener('input', () => {
     myNameDisplay.textContent = myNameInput.value.trim() || 'me';
   });
-

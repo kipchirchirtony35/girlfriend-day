@@ -1,5 +1,4 @@
-
-  :root{
+:root{
     --plum-deep: #2A1826;
     --plum-mid: #3B2233;
     --plum-soft: #4E2E44;
@@ -66,6 +65,20 @@
     text-align: center;
   }
 
+  .hero-stage{
+    position: relative;
+    margin-top: 56px;
+    width: min(340px, 78vw);
+    min-height: 300px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .hero-stage.revealed{
+    width: min(620px, 92vw);
+  }
+
   .hero .eyebrow{ margin-bottom: 18px; }
 
   .hero-title{
@@ -91,8 +104,18 @@
 
   /* envelope */
   .envelope-wrap{
-    margin-top: 56px;
     perspective: 1400px;
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 2;
+  }
+
+  .envelope-wrap.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(-14px) scale(0.94);
+    pointer-events: none;
   }
 
   .envelope{
@@ -155,22 +178,6 @@
     transform: translate(-50%, -10px) scale(0.6);
   }
 
-  .letter-peek{
-    position: absolute;
-    left: 8%; right: 8%;
-    bottom: 10px;
-    height: 0;
-    background: var(--cream);
-    border-radius: 2px 2px 0 0;
-    z-index: 2;
-    transition: height 0.7s cubic-bezier(.2,.9,.3,1) 0.35s, bottom 0.7s cubic-bezier(.2,.9,.3,1) 0.35s;
-    box-shadow: 0 -2px 14px rgba(0,0,0,0.2);
-  }
-  .envelope.open .letter-peek{
-    height: 300px;
-    bottom: 90px;
-  }
-
   .hero-hint{
     margin-top: 26px;
     font-size: 0.78rem;
@@ -194,23 +201,25 @@
     50%{ transform: translateY(8px); opacity: 0.3;}
   }
 
-  /* ================= LETTER SECTION ================= */
-  .letter-section{
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    padding: 4vh 5vw 12vh;
-  }
-
+  /* ================= LETTER (inline, over envelope) ================= */
   .letter-card{
     background: linear-gradient(180deg, #FBF4E7, #F3E7D2);
     color: #3A2A22;
     width: min(620px, 92vw);
-    padding: clamp(32px, 6vw, 64px);
+    padding: clamp(28px, 6vw, 56px);
     border-radius: 2px;
     box-shadow: 0 30px 60px rgba(0,0,0,0.35);
     position: relative;
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    transition: opacity 0.6s ease 0.25s, transform 0.6s cubic-bezier(.2,.9,.3,1) 0.25s;
+    pointer-events: none;
+  }
+
+  .letter-card.visible{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
   }
 
   .letter-card::before{
